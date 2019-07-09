@@ -2,33 +2,45 @@
 
 public class JointTester : MonoBehaviour
 {
-	private float targetVelocity = 0f;
-	public float TargetVelocity
-	{
-		get { return targetVelocity; }
-		set
-		{
-			targetVelocity = value;
-			motor.targetVelocity = value;
-			joint.motor = motor;
-		}
-	}
+	[SerializeField] ConfigurableJoint jointConfig;
 
-	[SerializeField] HingeJoint joint;
-	[SerializeField] float velocityChange;
-
-	private JointMotor motor;
-
-	private void Awake()
-	{
-		motor = joint.motor;
-	}
+	[SerializeField] private Vector3 currentRotation;
 
 	private void Update()
 	{
-		if (Input.GetKey(KeyCode.A)) TargetVelocity = -velocityChange;
-		
-		else if (Input.GetKey(KeyCode.D)) TargetVelocity = velocityChange;
-		else TargetVelocity = 0f;
+		float dt = Time.deltaTime;
+		if (Input.GetKey(KeyCode.W))
+		{
+			currentRotation.x += 90f * dt;
+			currentRotation.x = Mathf.Clamp
+				(currentRotation.x, jointConfig.lowAngularXLimit.limit, 
+				jointConfig.highAngularXLimit.limit);
+		}
+		else if (Input.GetKey(KeyCode.S))
+		{
+			currentRotation.x -= 90f * dt;
+			currentRotation.x = Mathf.Clamp
+				(currentRotation.x, jointConfig.lowAngularXLimit.limit,
+				jointConfig.highAngularXLimit.limit);
+		}
+
+		if (Input.GetKey(KeyCode.A))
+		{
+			currentRotation.z += 90f * dt;
+			currentRotation.z = Mathf.Clamp
+				(currentRotation.z, -jointConfig.angularZLimit.limit,
+				jointConfig.angularZLimit.limit);
+		}
+		else if (Input.GetKey(KeyCode.D))
+		{
+			currentRotation.z -= 90f * dt;
+			currentRotation.z = Mathf.Clamp
+				(currentRotation.z, -jointConfig.angularZLimit.limit,
+				jointConfig.angularZLimit.limit);
+		}
+
+
+		jointConfig.targetRotation = Quaternion.Euler(currentRotation);
+		//Debug.Log(jointConfig.targetRotation.eulerAngles);
 	}
 }
