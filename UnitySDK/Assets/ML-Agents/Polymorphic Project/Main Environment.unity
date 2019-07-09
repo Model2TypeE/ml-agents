@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e951526dcf9cfc4096e239a9fc0dd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jointConfig: {fileID: 1097239199}
+  jointConfig: {fileID: 1703939426}
   currentRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &223808042
 Transform:
@@ -445,12 +445,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!153 &1097239199 stripped
-ConfigurableJoint:
-  m_PrefabParentObject: {fileID: 153266352256566980, guid: d6fab6acc4a579548b12899677d4271a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1289847199}
---- !u!1001 &1289847199
+--- !u!1001 &772518577
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -492,3 +487,8 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6fab6acc4a579548b12899677d4271a, type: 2}
   m_IsPrefabParent: 0
+--- !u!153 &1703939426 stripped
+ConfigurableJoint:
+  m_PrefabParentObject: {fileID: 153485486444209246, guid: d6fab6acc4a579548b12899677d4271a,
+    type: 2}
+  m_PrefabInternal: {fileID: 772518577}
