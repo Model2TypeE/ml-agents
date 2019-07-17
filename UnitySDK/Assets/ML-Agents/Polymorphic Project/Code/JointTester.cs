@@ -1,46 +1,36 @@
 ﻿using UnityEngine;
 
-public class JointTester : MonoBehaviour
+namespace Polymorphism
 {
-	[SerializeField] ConfigurableJoint jointConfig;
-
-	[SerializeField] private Vector3 currentRotation;
-
-	private void Update()
+	public class JointTester : MonoBehaviour
 	{
-		float dt = Time.deltaTime;
-		if (Input.GetKey(KeyCode.W))
-		{
-			currentRotation.x += 90f * dt;
-			currentRotation.x = Mathf.Clamp
-				(currentRotation.x, jointConfig.lowAngularXLimit.limit, 
-				jointConfig.highAngularXLimit.limit);
-		}
-		else if (Input.GetKey(KeyCode.S))
-		{
-			currentRotation.x -= 90f * dt;
-			currentRotation.x = Mathf.Clamp
-				(currentRotation.x, jointConfig.lowAngularXLimit.limit,
-				jointConfig.highAngularXLimit.limit);
-		}
+		[SerializeField] ConfigurableJoint jointConfig;
 
-		if (Input.GetKey(KeyCode.A))
+		[SerializeField] private Vector3 currentRotation;
+
+		private void Update()
 		{
-			currentRotation.z += 90f * dt;
-			currentRotation.z = Mathf.Clamp
-				(currentRotation.z, -jointConfig.angularZLimit.limit,
-				jointConfig.angularZLimit.limit);
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			currentRotation.z -= 90f * dt;
-			currentRotation.z = Mathf.Clamp
-				(currentRotation.z, -jointConfig.angularZLimit.limit,
-				jointConfig.angularZLimit.limit);
-		}
+			float dt = Time.deltaTime;
+			if (Input.GetKey(KeyCode.W))
+			{
+				currentRotation.x += 90f * dt;
+				currentRotation.x = Mathf.Clamp
+					(currentRotation.x, jointConfig.lowAngularXLimit.limit,
+					jointConfig.highAngularXLimit.limit);
+			}
+			else if (Input.GetKey(KeyCode.S))
+			{
+				currentRotation.x -= 90f * dt;
+				currentRotation.x = Mathf.Clamp
+					(currentRotation.x, jointConfig.lowAngularXLimit.limit,
+					jointConfig.highAngularXLimit.limit);
+			}
 
 
-		jointConfig.targetRotation = Quaternion.Euler(currentRotation);
-		//Debug.Log(jointConfig.targetRotation.eulerAngles);
+			jointConfig.targetRotation = Quaternion.Euler(currentRotation);
+			//Debug.Log(jointConfig.targetRotation.eulerAngles);
+
+			//Debug.Log((transOne.localRotation * Quaternion.Inverse(transTwo.localRotation)));
+		}
 	}
 }
