@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Polymorphism
@@ -18,14 +17,16 @@ namespace Polymorphism
 		{
 			get
 			{
-				return 2;
+				return 3;
 			}
 		}
 
 		public override void CollectLimbObs(List<float> observations)
 		{
 			AddObservation(observations, grounded);
-			AddObservation(observations, rgb.position);
+
+			Vector3 localPosRelToCenter = agent.pivotRgb.transform.InverseTransformPoint(rgb.position);
+			AddObservation(observations, localPosRelToCenter);
 			AddObservation(observations, rgb.velocity);
 			AddObservation(observations, rgb.angularVelocity);
 			AddObservation(observations, currentNormalizedRotation);
@@ -34,7 +35,7 @@ namespace Polymorphism
 
 		public override void FeedActions(float[] actions, int startIndex)
 		{
-			SetJointProperties(actions[startIndex], 0f, 0f, actions[startIndex + 1]);
+			SetJointProperties(actions[startIndex], 0f, actions[startIndex + 1], actions[startIndex + 2]);
 		}
 
 		public override void OnAgentDone()

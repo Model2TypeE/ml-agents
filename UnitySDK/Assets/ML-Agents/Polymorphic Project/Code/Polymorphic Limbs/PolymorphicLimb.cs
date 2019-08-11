@@ -10,6 +10,7 @@ namespace Polymorphism
 		public abstract int ObsSize { get; }
 		public abstract int ActSize { get; }
 
+		[HideInInspector] public PolymorphicAgent agent;
 		public bool grounded;
 		protected Rigidbody rgb;
 		protected Vector3 startingPos;
@@ -32,6 +33,8 @@ namespace Polymorphism
 		{
 			transform.position = startingPos;
 			transform.rotation = startingRot;
+			rgb.velocity = Vector3.zero;
+			rgb.angularVelocity = Vector3.zero;
 		}
 
 		protected virtual void OnCollisionEnter(Collision collision)

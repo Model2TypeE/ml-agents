@@ -10,7 +10,7 @@ namespace Polymorphism
 		{
 			get
 			{
-				return 10;
+				return 16;
 			}
 		}
 
@@ -26,16 +26,15 @@ namespace Polymorphism
 		{
 			AddObservation(observations, grounded);
 			AddObservation(observations, rgb.position);
+			AddObservation(observations, transform.forward);
+			AddObservation(observations, transform.up);
 			AddObservation(observations, rgb.velocity);
 			AddObservation(observations, rgb.angularVelocity);
 		}
 
 		public override void FeedActions(float[] actions, int startIndex)
-		{ }
-
-		public override void OnAgentDone()
 		{
-			base.OnAgentDone();
+
 		}
 	}
 }
