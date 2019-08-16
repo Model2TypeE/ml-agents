@@ -1,7 +1,5 @@
 ﻿using MLAgents;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Polymorphism
@@ -13,7 +11,7 @@ namespace Polymorphism
 
 		private List<PolymorphicLimb> limbs;
 		private List<float> observations;
-		private Vector3 goalDir;
+		internal Vector3 goalDir;
 
 		private bool isNewDecisionStep;
 		private int currentDecisionStep;
@@ -30,10 +28,10 @@ namespace Polymorphism
 				limbs[i].agent = this;
 			}
 
-			//Debug.Assert(obsSize == brain.brainParameters.vectorObservationSize, 
-			//	"Total limb observation size of " + obsSize + " is unequal to brain parameters: " + brain.brainParameters.vectorObservationSize);
-			//Debug.Assert(actSize == brain.brainParameters.vectorActionSize[0], 
-			//	"Total limb action size of " + actSize + " is unequal to brain parameters: " + brain.brainParameters.vectorActionSize[0]);
+			Debug.Assert(obsSize == brain.brainParameters.vectorObservationSize,
+				"Total limb observation size of " + obsSize + " is unequal to brain parameters: " + brain.brainParameters.vectorObservationSize);
+			Debug.Assert(actSize == brain.brainParameters.vectorActionSize[0],
+				"Total limb action size of " + actSize + " is unequal to brain parameters: " + brain.brainParameters.vectorActionSize[0]);
 
 			observations = new List<float>(obsSize);
 		}
@@ -46,7 +44,6 @@ namespace Polymorphism
 				limbs[i].CollectLimbObs(observations);
 			}
 
-			AddVectorObs(goalDir.normalized);
 			AddVectorObs(observations);
 		}
 
@@ -65,8 +62,8 @@ namespace Polymorphism
 
 			goalDir = goal.position - pivotRgb.position;
 			AddReward(
-				+ 0.03f * Vector3.Dot(goalDir.normalized, pivotRgb.velocity)
-				+ 0.01f * Vector3.Dot(goalDir.normalized, pivotRgb.transform.forward)
+				+ 0.03f * Vector3.Dot(goalDir.normalized, pivotRgb.velocity) // velocity alignment
+				+ 0.01f * Vector3.Dot(goalDir.normalized, pivotRgb.transform.forward) // rotational alignment
 			);
 		}
 

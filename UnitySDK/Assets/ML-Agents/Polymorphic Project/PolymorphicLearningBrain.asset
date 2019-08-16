@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Name: PolymorphicLearningBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 171
+    vectorObservationSize: 229
     numStackedVectorObservations: 5
-    vectorActionSize: 14000000
+    vectorActionSize: 1c000000
     cameraResolutions: []
     vectorActionDescriptions:
     - 
@@ -37,6 +37,14 @@ MonoBehaviour:
     - 
     - 
     - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
     vectorActionSpaceType: 1
-  model: {fileID: 11400000, guid: 0b614acf99b407d4bac4369431923d1d, type: 3}
+  model: {fileID: 11400000, guid: fe25e3e37fda494499814aa6de908d6c, type: 3}
   inferenceDevice: 0

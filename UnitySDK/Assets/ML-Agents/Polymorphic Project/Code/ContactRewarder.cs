@@ -31,9 +31,16 @@ namespace Polymorphism
 			RewardTuple reward; // cant inline in C# 6.0
 			if (contactRewardTable.TryGetValue(collision.gameObject.tag, out reward))
 			{
-				// set rewards on agent and toggle isDone flag to true if requested
-				agent.SetReward(reward.RewardValue);
-				if (reward.ResetAgentOnContact) agent.Done();
+				// set or rewards on agent and toggle isDone flag to true if requested
+				if (reward.ResetAgentOnContact)
+				{
+					agent.SetReward(reward.RewardValue);
+					agent.Done();
+				}
+				else
+				{
+					agent.AddReward(reward.RewardValue);
+				}
 			}
 		}
 	}
