@@ -63,7 +63,7 @@ namespace Polymorphism
 			goalDir = goal.position - pivotRgb.position;
 			AddReward(
 				+ 0.03f * Vector3.Dot(goalDir.normalized, pivotRgb.velocity) // velocity alignment
-				+ 0.01f * Vector3.Dot(goalDir.normalized, pivotRgb.transform.forward) // rotational alignment
+				+ 0.05f * Vector3.Dot(goalDir.normalized, pivotRgb.transform.forward) // rotational alignment
 			);
 		}
 
