@@ -23,7 +23,15 @@ namespace Polymorphism
 
 		public override void CollectLimbObs(List<float> observations)
 		{
-			AddObservation(observations, grounded);
+			RaycastHit hit;
+			if(Physics.Raycast(transform.position, Vector3.down, out hit, 5f))
+			{
+				observations.Add(Vector3.Distance(transform.position, hit.point));
+			}
+			else
+			{
+				observations.Add(5f);
+			}
 
 			Vector3 localPosRelToCenter = agent.pivotRgb.transform.InverseTransformPoint(rgb.position);
 			AddObservation(observations, localPosRelToCenter);

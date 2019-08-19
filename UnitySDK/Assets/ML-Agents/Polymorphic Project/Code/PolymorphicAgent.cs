@@ -9,6 +9,7 @@ namespace Polymorphism
 		public Rigidbody pivotRgb;
 		public Transform goal;
 
+		private DirectionalGoal dirGoal;
 		private List<PolymorphicLimb> limbs;
 		private List<float> observations;
 		internal Vector3 goalDir;
@@ -34,6 +35,9 @@ namespace Polymorphism
 				"Total limb action size of " + actSize + " is unequal to brain parameters: " + brain.brainParameters.vectorActionSize[0]);
 
 			observations = new List<float>(obsSize);
+
+			dirGoal = goal.GetComponent<DirectionalGoal>();
+			dirGoal.ResetGoal();
 		}
 
 		public override void CollectObservations()
@@ -63,7 +67,7 @@ namespace Polymorphism
 			goalDir = goal.position - pivotRgb.position;
 			AddReward(
 				+ 0.03f * Vector3.Dot(goalDir.normalized, pivotRgb.velocity) // velocity alignment
-				+ 0.05f * Vector3.Dot(goalDir.normalized, pivotRgb.transform.forward) // rotational alignment
+				+ 0.01f * Vector3.Dot(goalDir.normalized, pivotRgb.transform.forward) // rotational alignment
 			);
 		}
 
@@ -88,6 +92,12 @@ namespace Polymorphism
 				currentDecisionStep++;
 				isNewDecisionStep = false;
 			}
+		}
+
+		public void OnGoalTouch()
+		{
+			dirGoal.ResetGoal();
+			AddReward(1f);
 		}
 	}
 }
